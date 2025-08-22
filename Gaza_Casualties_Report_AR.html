@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>تقرير مختصر: تحليل بيانات ضحايا غزة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @page { size: A4; margin: 18mm; }
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background:#f8f9fb; color:#111; }
+  .container { max-width: 900px; margin: 0 auto; background:#fff; padding: 32px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+  .badge { display:inline-block; padding:6px 12px; border-radius:999px; background:#eef2ff; color:#1e3a8a; font-size:14px; margin-bottom:10px; }
+  h1 { font-size: 28px; margin: 8px 0 16px; }
+  h2 { font-size: 22px; margin: 28px 0 12px; }
+  p, li { line-height: 1.9; font-size: 16px; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+  .card { background:#fafafa; border:1px solid #eee; border-radius:14px; padding:16px; }
+  .muted { color:#555; }
+  .footer { margin-top: 32px; font-size: 13px; color:#444; }
+  .kpi { display:flex; align-items:center; gap:12px; padding:16px; background:#f5f9ff; border:1px dashed #bcd; border-radius:12px; }
+  .kpi .dot { width:10px; height:10px; border-radius:50%; background:#2563eb; }
+  .callout { background:#fff7ed; border:1px solid #fed7aa; padding:14px; border-radius:12px; }
+  .placeholder { height:220px; background: repeating-linear-gradient(45deg,#f1f5f9,#f1f5f9 12px,#e2e8f0 12px,#e2e8f0 24px); border-radius:12px; border:1px solid #e2e8f0; display:flex; align-items:center; justify-content:center; color:#475569; }
+  .mono { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace; font-size: 14px; }
+  .tag { display:inline-block; padding:4px 10px; background:#ecfeff; border:1px solid #a5f3fc; color:#155e75; border-radius:999px; margin-left:6px; font-size:12px; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <span class="badge">تقرير تحليلي بصري</span>
+    <h1>تحليل بيانات ضحايا غزة — ملخص تنفيذي</h1>
+    <p class="muted">إعداد: <strong>Ashraf Amr</strong> — تاريخ الإصدار: 2025-08-21</p>
+
+    <div class="kpi">
+      <div class="dot"></div>
+      <div>
+        <div><strong>ملاحظة مهمة:</strong> هذا المستند مُعدّ كنسخة عرض Executive Summary جاهزة للنشر على لينكدإن. يمكن إدراج الرسوم البيانية النهائية مباشرة إذا تم توفير ملف <span class="mono">casualties_daily.csv</span> في نفس المجلد.</div>
+        <div class="muted">المصدر الأساسي للبيانات: Tech For Palestine — Daily Casualties (مُحدَّث يوميًا).</div>
+      </div>
+    </div>
+
+    <h2>١) الهدف</h2>
+    <p>فهم تطوّر أعداد <strong>الوفيات</strong> و<strong>الإصابات</strong> في غزة عبر الزمن، ومقارنة الاختلافات بين المصادر الرسمية، مع إبراز الأيام/الفترات التي شهدت ارتفاعات غير اعتيادية (Outliers) قد تؤثر على الإجماليات.</p>
+
+    <h2>٢) مصدر البيانات والمنهجية</h2>
+    <ul>
+      <li>البيانات مشتقة من تقارير يومية رسمية (وزارة الصحة في غزة، أو القنوات الحكومية عند انقطاع التقارير)، مع حقول تراكمية ويومية.</li>
+      <li>تمت المعالجة والاستكشاف باستخدام Python (Pandas) ورسم المخططات باستخدام Matplotlib/Seaborn داخل Jupyter Notebook.</li>
+      <li>التحليل يشمل: <span class="tag">تجميع شهري</span> <span class="tag">مقارنة مصادر</span> <span class="tag">اكتشاف قيم شاذة</span> <span class="tag">اتجاهات زمنية</span></li>
+    </ul>
+
+    <h2>٣) أبرز الأسئلة التحليلية</h2>
+    <ol>
+      <li>هل الاتجاه العام للوفيات والإصابات يتصاعد عبر الشهور؟</li>
+      <li>هل توجد اختلافات ملحوظة بين المصادر (MoH vs GMO) في فترات معيّنة؟</li>
+      <li>ما هي الأيام التي تُظهر <em>قفزات مفاجئة</em> تؤثر على متوسطات/إجماليات الفترات؟</li>
+    </ol>
+
+    <h2>٤) النتائج الرئيسية (مختصر بصري)</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>تطور شهري (وفيات)</h3>
+        <div class="placeholder">مكان الرسم البياني: "وفيات شهرية"</div>
+        <p class="muted">وصف موجز للاتجاه العام، وتحديد أشهر الذروة والانخفاض.</p>
+      </div>
+      <div class="card">
+        <h3>تطور شهري (إصابات)</h3>
+        <div class="placeholder">مكان الرسم البياني: "إصابات شهرية"</div>
+        <p class="muted">مقارنة سريعة بين نمط الإصابات والوفيات وهل يتحركان بنفس الاتجاه.</p>
+      </div>
+      <div class="card">
+        <h3>مقارنة بين المصادر</h3>
+        <div class="placeholder">مكان الرسم البياني: "MoH vs GMO"</div>
+        <p class="muted">اختلافات محتملة في بعض الفترات بسبب انقطاع الاتصالات أو تغيّر أساليب التبليغ.</p>
+      </div>
+      <div class="card">
+        <h3>Outliers (قيم شاذة)</h3>
+        <div class="placeholder">مكان الرسم البياني: "قيم يومية متطرفة"</div>
+        <p class="muted">أيام شهدت ارتفاعات غير اعتيادية قد تُفسَّر بأحداث ميدانية كبيرة.</p>
+      </div>
+    </div>
+
+    <h2>٥) استنتاجات</h2>
+    <ul>
+      <li><strong>اتجاه عام:</strong> يميل المنحنى للتصاعد في فترات محددة، مع فواصل استقرار قصيرة، ثم ارتفاعات جديدة.</li>
+      <li><strong>الفروقات بين المصادر:</strong> تظهر خصوصًا عند انقطاع التقارير الرسمية أو اختلاف فترة القياس (24/48 ساعة).</li>
+      <li><strong>التأثير الإنساني:</strong> الأرقام لا تعكس كامل الأثر الإنساني (المجاعة، نقص الرعاية، إلخ) — لكنها مؤشر شديد الدلالة على ضخامة المأساة.</li>
+    </ul>
+
+    <h2>٦) كيف أعدتُ التحليل؟</h2>
+    <ol>
+      <li>تهيئة البيئة (تنصيب المتطلبات من <span class="mono">requirements.txt</span>).</li>
+      <li>تنظيف الحقول وتوحيد التواريخ، والتعامل مع القيم الناقصة.</li>
+      <li>تجميع يومي ← أسبوعي/شهري، ثم حساب الإحصاءات (المتوسط/الوسيط/الانحراف/النِّسَب).</li>
+      <li>إعداد الرسوم البيانية وتخطيطها للألوان والتسميات العربية.</li>
+    </ol>
+
+    <div class="callout">
+      <strong>معلومة مهمة للنشر:</strong> لإرفاق هذا التقرير على لينكدإن، يمكنك تحميله كملف PDF أو استخدام الشرائح (Slides). كما يمكن إضافة 3–5 صور من الرسومات أعلاه داخل البوست لزيادة التفاعل.
+    </div>
+
+    <div class="footer">
+      <div><strong>المصدر:</strong> Tech For Palestine — Daily Casualties (casualties_daily). آخر تحديث مذكور في صفحة التوثيق: 2025-08-21.</div>
+      <div>المستودع: <span class="mono">Gaza-Casualties-EDA</span> — GitHub.</div>
+      <div class="muted">هذا المستند قابل للتحديث بإدراج الرسوم النهائية مباشرة داخل أماكنها.</div>
+    </div>
+  </div>
+</body>
+</html>
